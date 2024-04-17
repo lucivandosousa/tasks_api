@@ -4,19 +4,43 @@ const taskServices = new TaskServices()
 
 class TasksController {
   insertTask(req, res) {
-    res.status(200).send("Tasks")
+    taskServices.insertTask(req.body, (error, result) => {
+      if (error) {
+        return res.status(500).send(error)
+      } else {
+        return res.status(201).json(result[0])
+      }
+    })
   }
 
   listTasks(req, res) {
-    res.status(200).send("Tasks")
+    taskServices.listTask((error, result) => {
+      if (error) {
+        return res.status(500).send(error)
+      } else {
+        return res.status(200).json(result)
+      }
+    })
   }
 
   updateTask(req, res) {
-    res.status(200).send("Tasks")
+    taskServices.updateTask(req.params.id, req.body, (error, result) => {
+      if (error) {
+        return res.status(500).send(error)
+      } else {
+        return res.status(200).json(result[0])
+      }
+    })
   }
 
   deleteTask(req, res) {
-    res.status(200).send("Tasks")
+    taskServices.deleteTask(req.params.id, (error, result) => {
+      if (error) {
+        return res.status(500).send(error)
+      } else {
+        return res.status(200).json(result[0])
+      }
+    })
   }
 }
 
